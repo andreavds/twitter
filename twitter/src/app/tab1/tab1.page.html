@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Guntter
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let goont of goonts">
+      <ion-label>
+        <h2>{{ goont.author }}</h2>
+        <p>{{ goont.content }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+<!--  <app-explore-container name="Tab 1 page"></app-explore-container> -->
+</ion-content>
