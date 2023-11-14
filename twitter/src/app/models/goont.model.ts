@@ -3,5 +3,5 @@ export interface Goont {
     content: string;
     author: string;
     timestamp: Date;
+    images: string[];
   }
-  
