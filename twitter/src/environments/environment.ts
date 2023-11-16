@@ -25,7 +25,8 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: firebaseConfig
 };
 
 /*
