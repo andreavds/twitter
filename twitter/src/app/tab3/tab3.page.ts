@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GoontService } from '../services/goont.service';
+import { Goont } from '../models/goont.model'; // Importa el modelo Goont
 
 @Component({
   selector: 'app-tab3',
@@ -13,14 +14,20 @@ export class Tab3Page {
 
   addGoont() {
     if (this.newGoontContent.trim() !== '') {
-      this.goontService.addGoont({
-        id: this.goontService.getNextGoontId(),
+      const newGoont: Goont = {
+        _id: { $oid: '' }, // Asigna el ID según corresponda
         content: this.newGoontContent,
-        author: 'UsuarioActual',
-        timestamp: new Date(),
-      });
+        author: 'UsuarioActual', // O el campo de autor correspondiente
+        likes: [],
+        image: null,
+        isComment: false,
+        createdAt: new Date().toISOString(),
+        __v: 0
+      };
 
-      this.newGoontContent = '';
+      this.goontService.addGoont(newGoont); // Agrega el nuevo goont usando el servicio
+
+      this.newGoontContent = ''; // Limpia el contenido después de agregar el goont
     }
   }
 }

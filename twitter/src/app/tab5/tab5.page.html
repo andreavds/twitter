@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tu perfil </ion-title>
+    <ion-title>Tu perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,36 @@
       <ion-title size="large">tab5</ion-title>
     </ion-toolbar>
   </ion-header>
+
+
+  <ion-content [fullscreen]="true">
+    <div *ngIf="userProfile">
+      <ion-card *ngIf="userProfile.wallpaperPicture" class="wallpaper">
+        <img [src]="userProfile.wallpaperPicture" alt="Wallpaper">
+      </ion-card>
+  
+      <div class="profile-picture">
+        <img [src]="userProfile.profilePicture" alt="Profile Picture">
+      </div>
+
+    <div class="user-details">
+      <h2>{{ userProfile.fullname }}</h2>
+      <p>@{{ userProfile.username }}</p>
+
+      <ion-item *ngIf="userProfile.bio">
+        <ion-label>Bio</ion-label>
+        <ion-textarea [(ngModel)]="userProfile.bio" maxlength="70"></ion-textarea>
+      </ion-item>
+
+      <ion-item *ngIf="userProfile.followers !== undefined">
+        <ion-label>Seguidores</ion-label>
+        <ion-badge slot="end">{{ userProfile.followers }}</ion-badge>
+      </ion-item>
+
+      <ion-item *ngIf="userProfile.following !== undefined">
+        <ion-label>Seguidos</ion-label>
+        <ion-badge slot="end">{{ userProfile.following }}</ion-badge>
+      </ion-item>
+    </div>
+  </div>
 </ion-content>

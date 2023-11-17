@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Goont } from '../models/goont.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoontService {
-  private goonts: Goont[] = [
-    { id: 1, content: 'yo quiero comprar venezuela', author: 'Usuario1', timestamp: new Date() },
-    { id: 2, content: 'no puede', author: 'Usuario2', timestamp: new Date() },
-    { id: 3, content: 'si', author: 'Usuario1', timestamp: new Date() },
-    { id: 4, content: 'no', author: 'Usuario2', timestamp: new Date() },
-    { id: 5, content: 'si', author: 'Usuario1', timestamp: new Date() },
-    { id: 6, content: 'no', author: 'Usuario2', timestamp: new Date() },
-    { id: 7, content: 'si', author: 'Usuario1', timestamp: new Date() },
-    { id: 8, content: 'bueno', author: 'Usuario2', timestamp: new Date() },    
-  ];
+  private goonts: Goont[] = [];
+  private users: User[] = [];
 
-  getGoonts(): Goont[] {
-    return this.goonts || [];
+  constructor() {}
+
+  getGoonts(): Observable<Goont[]> {
+    return of(this.goonts);
   }
 
-  addGoont(goont: Goont): void {
-    this.goonts.push(goont);
+  addGoont(newGoont: Goont): void {
+    this.goonts.push(newGoont);
   }
 
-  getNextGoontId(): number {
-    return this.goonts.length + 1;
+  getUsers(): Observable<User[]> {
+    return of(this.users);
   }
+
+  addUser(newUser: User): void {
+    this.users.push(newUser);
+  }
+
 }

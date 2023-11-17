@@ -1,0 +1,36 @@
+.wallpaper {
+    padding: 0;
+    margin: 0;
+    height: 150px;
+    position: relative;
+  }
+
+  .wallpaper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .profile-picture {
+    position: absolute;
+    top: 140px; /* Ajusta la posición vertical */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    border-radius: 50%;
+    border: 3px solid #fff; /* Opcional: Borde blanco a la imagen de perfil */
+    overflow: hidden; /* Oculta partes de la imagen que sobrepasen el borde redondo */
+  }
+
+  .profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Hace la imagen de perfil redonda */
+    object-fit: cover; /* Ajusta la imagen a la forma circular */
+  }
+
+  .user-details {
+    text-align: center;
+    margin-top: 90px; /* Ajusta la distancia desde la parte superior de la imagen de perfil */
+    color: white; /* Color del texto */
+  }
