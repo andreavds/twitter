@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab5',
-  templateUrl: './tab5.page.html',
-  styleUrls: ['./tab5.page.scss'],
+  templateUrl: 'tab5.page.html',
+  styleUrls: ['tab5.page.scss']
 })
+export class Tab5Page implements OnInit {
+  userProfile: any;
+  loadingProfileData: boolean = true;
+  errorLoadingProfile: boolean = false;
 
-export class Tab5Page {
-  userProfile: User = {
-    _id: '1',
-    username: 'Naruto',
-    email: 'naruto@hotmail.com',
-    fullname: 'Tu minita kawaii uwu',
-    bio: 'Sasuke te extraño mi amor :(',
-    profilePicture: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5xTCkh0Cj1S2LtFeuw97diq1vKEQ1sKKpBIpfdVxS&s',
-    wallpaperPicture: 'https://e0.pxfuel.com/wallpapers/281/315/desktop-wallpaper-naruto-x-sasuke-sasuke-ninja-yaoi-naruto-kiss-thumbnail.jpg',    
-    followers: ['100', '343'],
-    following: ['50', '4']
-  };
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    const currentUserUsername = 'yo'; 
+    this.loadUserProfileData();
+  }
 
-    this.userService.getUserByUsername(currentUserUsername).subscribe((user) => {
-      if (user) {
-        this.userProfile = user;
-      }
-    });
+  loadUserProfileData() {
+    this.authService.getUserProfileData()
+      .then((userData: any) => {
+        this.userProfile = userData;
+        this.loadingProfileData = false;
+      })
+      .catch(error => {
+        console.error('Error al cargar los datos del perfil del usuario', error);
+        this.errorLoadingProfile = true;
+        this.loadingProfileData = false;
+      });
   }
 }

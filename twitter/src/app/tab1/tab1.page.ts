@@ -15,11 +15,11 @@ export class Tab1Page implements OnInit, OnDestroy {
   constructor(private goontService: GoontService) {}
 
   ngOnInit() {
-    this.loadGoonts();
+    this.loadAllGoonts();
   }
 
-  loadGoonts() {
-    this.goontsSubscription = this.goontService.getGoonts().subscribe((data: Goont[]) => {
+  loadAllGoonts() {
+    this.goontsSubscription = this.goontService.getAllGoonts().subscribe((data: Goont[]) => {
       this.goonts = data;
     });
   }
@@ -36,8 +36,8 @@ export class Tab1Page implements OnInit, OnDestroy {
       __v: 0 
     };
   
-    this.goontService.addGoont(newGoont);
-    this.loadGoonts();
+    this.goontService;
+    this.loadAllGoonts();
   }
   
   ngOnDestroy() {

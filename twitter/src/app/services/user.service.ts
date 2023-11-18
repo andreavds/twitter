@@ -1,29 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { User } from '../models/user.model';
+import { IUser } from '../models/user.model';
+import { jwtDecode } from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private users: User[] = [];
+  private users: IUser[] = [];
 
   constructor() {}
 
-  getUsers(): Observable<User[]> {
+  // Obtener usuarios
+  getUsers(): Observable<IUser[]> {
     return of(this.users);
   }
 
-  addUser(newUser: User): void {
+  // Añadir un nuevo usuario
+  addUser(newUser: IUser): void {
     this.users.push(newUser);
   }
 
-  getUserByUsername(username: string): Observable<User | undefined> {
+  // Obtener el ID del token
+  getUserIdFromToken(token: string): string | undefined {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.id;
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return undefined;
+    }
+  }
+
+  // Obtener los usuarios por el nombre de usuario
+  getUserByUsername(username: string): Observable<IUser | undefined> {
     const foundUser = this.users.find((user) => user.username === username);
     return of(foundUser);
   }
 
-  updateUserProfile(user: User): void {
+
+  // Actualizar el perfil del usuario
+  updateUserProfile(user: IUser): void {
     const index = this.users.findIndex((u) => u.username === user.username);
     if (index !== -1) {
       this.users[index] = user;

@@ -1,13 +1,17 @@
-export interface User {
-    _id: string;
+export interface IUser {
+    _id: string; 
     username: string;
     email: string;
-//  password: string;
+    password: string;
     fullname: string;
     bio: string;
     profilePicture: string;
-    wallpaperPicture: string;
-    followers: string[];
-    following: string[];
+    bannerPicture: string;
+    followers: string[]; 
+    followersInt: number;
+    following: string[]; 
+    followingInt: number;
+    goonts: string[];
+    createdAt: Date;
   }
   
