@@ -19,27 +19,22 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   loadAllGoonts() {
-    this.goontsSubscription = this.goontService.getAllGoonts().subscribe((data: Goont[]) => {
-      this.goonts = data;
-    });
+    this.goontsSubscription = this.goontService.getAllGoonts().subscribe(
+      (data: any) => {
+        if (Array.isArray(data.allGoonts)) {
+          this.goonts = data.allGoonts.sort((a: Goont, b: Goont) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        } else {
+          console.error('El arreglo de goonts no está presente en la respuesta:', data);
+        }
+      },
+      (error) => {
+        console.error('Error al obtener los Goonts:', error);
+      }
+    );
   }
 
-  addGoont(content: string) {
-    const newGoont: Goont = {
-      _id: { $oid: '' },
-      content: content,
-      author: 'Yo',
-      likes: [],
-      image: null,
-      isComment: false,
-      createdAt: new Date().toISOString(), 
-      __v: 0 
-    };
-  
-    this.goontService;
-    this.loadAllGoonts();
-  }
-  
   ngOnDestroy() {
     this.goontsSubscription.unsubscribe();
   }

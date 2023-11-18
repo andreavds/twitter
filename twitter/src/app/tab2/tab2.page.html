@@ -13,5 +13,28 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-item>
+    <ion-label position="floating">Buscar</ion-label>
+    <ion-input type="text" [(ngModel)]="searchText" debounce="500"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Filtrar por:</ion-label>
+    <ion-select placeholder="Seleccionar filtro" [(ngModel)]="selectedFilter" (ionChange)="applyFilter()">
+      <ion-select-option value="oldToNew">Más antiguos</ion-select-option>
+      <ion-select-option value="newToOld">Más nuevos</ion-select-option>
+      <ion-select-option value="mostLiked">Más likes</ion-select-option>
+      <ion-select-option value="lessLiked">Menos likes</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let goont of filteredGoonts">
+      <ion-label>
+        <h2>{{ goont.author.username }}</h2>
+        <p>{{ goont.author.fullname }}</p>
+        <p>{{ goont.content }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

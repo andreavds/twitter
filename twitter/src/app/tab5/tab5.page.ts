@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { IUser } from '../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-tab5',
@@ -7,26 +10,22 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['tab5.page.scss']
 })
 export class Tab5Page implements OnInit {
-  userProfile: any;
-  loadingProfileData: boolean = true;
-  errorLoadingProfile: boolean = false;
+  userId: string = '';
+  userProfile: IUser | undefined;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
-    this.loadUserProfileData();
-  }
-
-  loadUserProfileData() {
-    this.authService.getUserProfileData()
-      .then((userData: any) => {
-        this.userProfile = userData;
-        this.loadingProfileData = false;
-      })
-      .catch(error => {
-        console.error('Error al cargar los datos del perfil del usuario', error);
-        this.errorLoadingProfile = true;
-        this.loadingProfileData = false;
-      });
+    this.userService.getUserProfile().subscribe(
+      (user: IUser) => {
+        this.userProfile = user;
+      },
+      (error: any) => {
+        console.error('Error al obtener detalles del perfil del usuario:', error);
+      }
+    );
   }
 }

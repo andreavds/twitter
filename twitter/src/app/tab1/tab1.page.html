@@ -15,12 +15,15 @@
 
   <ion-list>
     <ion-item *ngFor="let goont of goonts">
+      <ion-avatar slot="start">
+        <img [src]="goont.author.profilePic" *ngIf="goont.author.profilePic" />
+      </ion-avatar>
       <ion-label>
-        <h2>{{ goont.author }}</h2>
+        <h1>{{ goont.author.fullname }}</h1>        
+        <h2>@{{ goont.author.username }}</h2>
+
         <p>{{ goont.content }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
-
-<!--  <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

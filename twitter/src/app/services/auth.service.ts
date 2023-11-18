@@ -57,25 +57,6 @@ export class AuthService {
     }
   }
   
-
-  // Obtener los datos del perfil del usuario
-  async getUserProfileData(): Promise<any> {
-    const accessToken = this.getAccessToken();
-    if (!accessToken) {
-      throw new Error('Token no encontrado en el almacenamiento local');
-    }
-
-    try {
-      const response = await firstValueFrom(this.http.post(`${this.apiUrl}/getuserdata`, {}, {
-        headers: { 'Authorization': `Bearer ${accessToken}` }
-      }));
-      return response;
-    } catch (error) {
-      console.error('Error al obtener datos del perfil:', error);
-      throw error;
-    }
-  }
-
   // Almacenar el token
   private getAccessToken(): string {
     return localStorage.getItem('accessToken') || '';

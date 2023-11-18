@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Actividad </ion-title>
+    <ion-title>
+      Buscar Guntters
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tab4</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-label position="floating">Buscar por nombre de usuario</ion-label>
+    <ion-input type="text" [(ngModel)]="searchUsername" debounce="500"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="onSearch()">
+    Buscar
+  </ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let user of filteredUsers">
+      <ion-label>
+        <h1>{{ user.fullname }}</h1>
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.bio }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
