@@ -5,6 +5,15 @@ import { firstValueFrom } from 'rxjs';
 interface LoginResponse {
   token: string;
 }
+const userData = {
+  username: '',
+  email: '',
+  password: '',
+  fullname: '',
+  bio: '',
+  profilePicture: ''
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +24,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   registerUser(userData: any): Promise<any> {
-    return this.http.post(`${this.apiUrl}/signup`, userData).toPromise();
+    const registerData = {
+      email: userData.email,
+      password: userData.password,
+      username: userData.username,
+      fullname: userData.fullname,
+      profilePicture: userData.profilePicture,
+      bio: userData.bio
+    };
+
+    return this.http.post(`${this.apiUrl}/signup`, registerData).toPromise();
   }
 
   

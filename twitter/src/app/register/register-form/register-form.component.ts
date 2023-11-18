@@ -32,10 +32,10 @@ export class RegisterFormComponent {
     this.authService.registerUser(this.user)
       .then((response: any) => {
         console.log('Usuario registrado:', response.data);
-        this.router.navigate(['/login/login-form']);
+        this.router.navigate(['/login-form']);
       })
       .catch((error: any) => {
         console.error('Error al registrar usuario:', error);
       });
-  }  
+  }
 }

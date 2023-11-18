@@ -17,11 +17,6 @@ export class UserService {
     return of(this.users);
   }
 
-  // Añadir un nuevo usuario
-  addUser(newUser: IUser): void {
-    this.users.push(newUser);
-  }
-
   // Obtener el ID del token
   getUserIdFromToken(token: string): string | undefined {
     try {
